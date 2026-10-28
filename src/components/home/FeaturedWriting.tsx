@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, BookOpen } from 'lucide-react';
+import { ArrowRight, BookOpen, ExternalLink } from 'lucide-react';
 import { articles } from '../../data/writing';
 import { useReveal } from '../../hooks/useReveal';
 
@@ -48,9 +48,16 @@ export default function FeaturedWriting() {
               <p style={{ fontSize: 13.5, color: 'var(--text-2)', lineHeight: 1.7, flex: 1 }}>
                 {article.description}
               </p>
-              <span style={{ fontFamily: 'var(--f-mono)', fontSize: 11, color: 'var(--text-3)' }}>
-                {article.readTime} · Full URL coming soon
-              </span>
+              {article.url && (
+                <a
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12.5, color: 'var(--violet)', fontWeight: 600 }}
+                >
+                  Read article <ExternalLink size={12} />
+                </a>
+              )}
             </motion.article>
           ))}
         </div>

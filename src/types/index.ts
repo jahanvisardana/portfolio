@@ -35,7 +35,7 @@ export interface Article {
   title: string;
   category: string;
   description: string;
-  readTime?: string;
+
   url?: string;
 }
 
