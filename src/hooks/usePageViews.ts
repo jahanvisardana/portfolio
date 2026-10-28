@@ -9,10 +9,8 @@ export function usePageViews() {
   useEffect(() => {
     if (sessionStorage.getItem(SESSION_KEY)) {
       supabase
-        .from('page_views')
-        .select('count')
-        .single()
-        .then(({ data }) => { if (data) setCount(data.count as number); });
+        .rpc('get_views')
+        .then(({ data }) => { if (data != null) setCount(data as number); });
     } else {
       sessionStorage.setItem(SESSION_KEY, '1');
       supabase
