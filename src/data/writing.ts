@@ -15,5 +15,6 @@ export const articles: Article[] = [
     description:
       'A technical case study on building an AI-powered content moderation pipeline using automated risk assessment, asynchronous processing queues, and a structured human review workflow for edge cases.',
     readTime: '10 min read',
+    url: 'https://geekyants.com/blog/automate-the-obvious-review-the-rest-designing-ai-powered-content-moderation',
   },
 ];

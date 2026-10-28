@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ScrollToTop from '../ScrollToTop';
+import ViewCounter from '../ViewCounter';
 
 const pageVariants = {
   initial: { opacity: 0, y: 10 },
@@ -17,6 +18,7 @@ export default function Layout() {
     <>
       <ScrollToTop />
       <Navbar />
+      <ViewCounter />
       <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
