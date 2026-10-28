@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Users, Truck, MessageSquare, Home, Network, Printer, Gift, Server } from 'lucide-react';
 import type { Project } from '../../types';
 
@@ -43,6 +43,26 @@ export default function ProjectCarousel({ projects }: Props) {
     }
     setCurrent(i);
   }, []);
+
+  // Sync dots when user scrolls manually (trackpad/touch)
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number((entry.target as HTMLElement).dataset.idx);
+            setCurrent(idx);
+          }
+        });
+      },
+      { root: track, threshold: 0.6 }
+    );
+    const slides = track.querySelectorAll('[data-idx]');
+    slides.forEach((slide) => observer.observe(slide));
+    return () => observer.disconnect();
+  }, [projects.length]);
 
   const prev = () => scrollTo(Math.max(0, current - 1));
   const next = () => scrollTo(Math.min(projects.length - 1, current + 1));
