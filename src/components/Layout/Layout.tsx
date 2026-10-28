@@ -17,6 +17,11 @@ export default function Layout() {
   return (
     <>
       <ScrollToTop />
+      <div className="light-bubbles" aria-hidden="true">
+        {Array.from({ length: 10 }).map((_, i) => (
+          <div key={i} className="bubble" />
+        ))}
+      </div>
       <Navbar />
       <ViewCounter />
       <AnimatePresence mode="wait">

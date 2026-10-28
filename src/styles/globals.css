@@ -1270,9 +1270,9 @@ body::after {
    LIGHT THEME
    ============================================= */
 [data-theme="light"] {
-  --bg: #f5f3ff;
-  --bg-2: #ede9fe;
-  --bg-3: #e5dffc;
+  --bg: #f0ebff;
+  --bg-2: #e8e0fd;
+  --bg-3: #ddd4fb;
   --glass: rgba(255, 255, 255, 0.72);
   --glass-hover: rgba(192, 132, 252, 0.1);
   --border: rgba(0, 0, 0, 0.09);
@@ -1286,14 +1286,40 @@ body::after {
   --s-hover: 0 10px 40px rgba(168,85,247,0.18);
 }
 [data-theme="light"] body {
-  background: var(--bg);
+  background: linear-gradient(135deg, #f0ebff 0%, #fce7f3 50%, #ede9fe 100%);
   color: var(--text-1);
 }
 [data-theme="light"] body::before {
-  background: radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(168,85,247,0.18) 0%, transparent 65%);
 }
 [data-theme="light"] body::after {
-  background: radial-gradient(circle, rgba(244,114,182,0.06) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(244,114,182,0.14) 0%, transparent 65%);
+}
+
+/* Light theme bubbles */
+[data-theme="light"] body .light-bubbles { display: block; }
+.light-bubbles { display: none; position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: bubbleFloat linear infinite;
+}
+.bubble:nth-child(1)  { width: 60px;  height: 60px;  left: 10%;  background: rgba(192,132,252,0.18); animation-duration: 12s; animation-delay: 0s;    bottom: -80px; }
+.bubble:nth-child(2)  { width: 40px;  height: 40px;  left: 25%;  background: rgba(244,114,182,0.16); animation-duration: 15s; animation-delay: 2s;    bottom: -60px; }
+.bubble:nth-child(3)  { width: 80px;  height: 80px;  left: 40%;  background: rgba(96,165,250,0.12);  animation-duration: 10s; animation-delay: 4s;    bottom: -100px; }
+.bubble:nth-child(4)  { width: 30px;  height: 30px;  left: 55%;  background: rgba(192,132,252,0.22); animation-duration: 13s; animation-delay: 1s;    bottom: -50px; }
+.bubble:nth-child(5)  { width: 55px;  height: 55px;  left: 68%;  background: rgba(244,114,182,0.14); animation-duration: 11s; animation-delay: 3s;    bottom: -75px; }
+.bubble:nth-child(6)  { width: 45px;  height: 45px;  left: 80%;  background: rgba(96,165,250,0.15);  animation-duration: 14s; animation-delay: 5s;    bottom: -65px; }
+.bubble:nth-child(7)  { width: 25px;  height: 25px;  left: 90%;  background: rgba(192,132,252,0.2);  animation-duration: 9s;  animation-delay: 0.5s;  bottom: -45px; }
+.bubble:nth-child(8)  { width: 70px;  height: 70px;  left: 5%;   background: rgba(244,114,182,0.12); animation-duration: 16s; animation-delay: 6s;    bottom: -90px; }
+.bubble:nth-child(9)  { width: 35px;  height: 35px;  left: 72%;  background: rgba(192,132,252,0.15); animation-duration: 11s; animation-delay: 2.5s;  bottom: -55px; }
+.bubble:nth-child(10) { width: 50px;  height: 50px;  left: 48%;  background: rgba(244,114,182,0.18); animation-duration: 13s; animation-delay: 7s;    bottom: -70px; }
+@keyframes bubbleFloat {
+  0%   { transform: translateY(0) scale(1);    opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.8; }
+  100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
 }
 [data-theme="light"] .navbar__pill {
   background: rgba(255,255,255,0.92);
