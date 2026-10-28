@@ -935,35 +935,35 @@ body::after {
   overflow: visible;
   margin: 2px 0;
 }
-/* Animated light that flows down */
+/* Animated light that flows up */
 .exp-step__flow {
   position: absolute;
-  top: -10%;
+  bottom: -10%;
   left: 0;
   width: 100%;
   height: 45%;
   border-radius: 2px;
-  background: linear-gradient(to bottom, transparent, var(--violet), transparent);
-  animation: flowDown 1.8s ease-in-out infinite;
+  background: linear-gradient(to top, transparent, var(--violet), transparent);
+  animation: flowUp 1.8s ease-in-out infinite;
   animation-delay: var(--flow-delay);
 }
-@keyframes flowDown {
-  0%   { top: -40%; opacity: 0; }
+@keyframes flowUp {
+  0%   { bottom: -40%; opacity: 0; }
   20%  { opacity: 1; }
   80%  { opacity: 1; }
-  100% { top: 130%; opacity: 0; }
+  100% { bottom: 130%; opacity: 0; }
 }
-/* Small arrowhead anchored at bottom of connector */
+/* Small arrowhead anchored at top of connector */
 .exp-step__chevron {
   position: absolute;
-  bottom: -9px;
+  top: -9px;
   color: rgba(255,255,255,0.22);
   animation: chevronPulse 1.8s ease-in-out infinite;
   animation-delay: var(--flow-delay);
 }
 @keyframes chevronPulse {
   0%, 100% { opacity: 0.2; transform: translateY(0); }
-  50%       { opacity: 0.7; transform: translateY(2px); }
+  50%       { opacity: 0.7; transform: translateY(-2px); }
 }
 
 /* Right column: text */
@@ -1462,3 +1462,32 @@ body::after {
 .modal-state p { font-size: 13.5px; color: var(--text-2); }
 .spin { animation: spinIcon 0.8s linear infinite; }
 @keyframes spinIcon { to { transform: rotate(360deg); } }
+
+/* =============================================
+   PROFILE CARD FLIP
+   ============================================= */
+.profile-flip {
+  perspective: 900px;
+  cursor: pointer;
+}
+.profile-flip__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.profile-flip:hover .profile-flip__inner {
+  transform: rotateY(180deg);
+}
+.profile-flip__front,
+.profile-flip__back {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.profile-flip__back {
+  transform: rotateY(180deg);
+}

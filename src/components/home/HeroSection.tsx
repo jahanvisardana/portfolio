@@ -21,59 +21,82 @@ function ProfileAvatar() {
         }}
       />
 
-      {/* Avatar circle */}
-      <div style={{ position: 'relative', width: 256, height: 256 }}>
-        {/* Spinning gradient ring */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: -3,
-            borderRadius: '50%',
-            background: 'conic-gradient(from 0deg, #C084FC, #60A5FA, #F472B6, #C084FC)',
-            animation: 'spin 7s linear infinite',
-          }}
-        />
-        {/* Gap ring */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 2,
-            borderRadius: '50%',
-            background: 'var(--bg)',
-          }}
-        />
-        {/* Photo — protected from easy download */}
-        <img
-          src={`${import.meta.env.BASE_URL}profile.png`}
-          alt="Jahanvi"
-          draggable={false}
-          onContextMenu={(e) => e.preventDefault()}
-          onDragStart={(e) => e.preventDefault()}
-          style={{
-            position: 'absolute',
-            inset: 6,
-            width: 'calc(100% - 12px)',
-            height: 'calc(100% - 12px)',
-            borderRadius: '50%',
-            objectFit: 'cover',
-            objectPosition: 'center top',
-            WebkitUserDrag: 'none',
-            userSelect: 'none',
-            pointerEvents: 'none',
-          } as React.CSSProperties}
-        />
-        {/* Transparent overlay to block right-click on image */}
-        <div
-          aria-hidden="true"
-          onContextMenu={(e) => e.preventDefault()}
-          style={{
-            position: 'absolute',
-            inset: 6,
-            borderRadius: '50%',
-            zIndex: 2,
-          }}
-        />
+      {/* Avatar circle with flip */}
+      <div className="profile-flip" style={{ position: 'relative', width: 256, height: 256 }}>
+        <div className="profile-flip__inner">
+
+          {/* FRONT — photo */}
+          <div className="profile-flip__front">
+            {/* Spinning gradient ring */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                inset: -3,
+                borderRadius: '50%',
+                background: 'conic-gradient(from 0deg, #C084FC, #60A5FA, #F472B6, #C084FC)',
+                animation: 'spin 7s linear infinite',
+              }}
+            />
+            <div style={{ position: 'absolute', inset: 2, borderRadius: '50%', background: 'var(--bg)' }} />
+            <img
+              src={`${import.meta.env.BASE_URL}profile.png`}
+              alt="Jahanvi"
+              draggable={false}
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
+              style={{
+                position: 'absolute',
+                inset: 6,
+                width: 'calc(100% - 12px)',
+                height: 'calc(100% - 12px)',
+                borderRadius: '50%',
+                objectFit: 'cover',
+                objectPosition: 'center top',
+                WebkitUserDrag: 'none',
+                userSelect: 'none',
+                pointerEvents: 'none',
+              } as React.CSSProperties}
+            />
+            <div aria-hidden="true" onContextMenu={(e) => e.preventDefault()} style={{ position: 'absolute', inset: 6, borderRadius: '50%', zIndex: 2 }} />
+          </div>
+
+          {/* BACK — avatar card */}
+          <div className="profile-flip__back">
+            <div
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                inset: -3,
+                borderRadius: '50%',
+                background: 'conic-gradient(from 0deg, #F472B6, #C084FC, #60A5FA, #F472B6)',
+                animation: 'spin 7s linear infinite reverse',
+              }}
+            />
+            <div style={{ position: 'absolute', inset: 2, borderRadius: '50%', background: 'var(--bg-2)' }} />
+            <div style={{
+              position: 'absolute',
+              inset: 6,
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, rgba(192,132,252,0.15), rgba(96,165,250,0.1))',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 6,
+              padding: 20,
+              textAlign: 'center',
+            }}>
+              <div style={{ fontSize: 32 }}>👩‍💻</div>
+              <div style={{ fontFamily: 'var(--f-head)', fontWeight: 700, fontSize: 14, color: 'var(--text-1)', lineHeight: 1.2 }}>Jahanvi Sardana</div>
+              <div style={{ fontFamily: 'var(--f-mono)', fontSize: 10, color: 'var(--violet)', letterSpacing: 0.5 }}>SSE II · GeekyAnts</div>
+              <div style={{ width: 32, height: 1, background: 'var(--border)', margin: '2px 0' }} />
+              <div style={{ fontFamily: 'var(--f-mono)', fontSize: 9.5, color: 'var(--text-3)' }}>jahanvi@geekyants.com</div>
+              <div style={{ fontFamily: 'var(--f-mono)', fontSize: 9.5, color: 'var(--cyan)' }}>Bangalore · India</div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       {/* Floating info chips */}

@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronUp } from 'lucide-react';
 import { useReveal } from '../hooks/useReveal';
 
 const responsibilities = [
@@ -82,11 +82,11 @@ export default function Experience() {
               {/* Career progression — animated vertical stepper */}
               <div className="exp-stepper" aria-label="Career progression at GeekyAnts">
                 {([
-                  { label: 'Intern' },
-                  { label: 'Software Engineer I' },
-                  { label: 'Software Engineer II' },
-                  { label: 'Senior Software Engineer III' },
                   { label: 'Senior Software Engineer II', current: true },
+                  { label: 'Senior Software Engineer III' },
+                  { label: 'Software Engineer II' },
+                  { label: 'Software Engineer I' },
+                  { label: 'Intern' },
                 ] as { label: string; current?: boolean }[]).map((step, i, arr) => (
                   <div key={step.label} className="exp-step-row" style={{ '--step-i': i } as React.CSSProperties}>
 
@@ -98,7 +98,7 @@ export default function Experience() {
                       {i < arr.length - 1 && (
                         <div className="exp-step__connector">
                           <div className="exp-step__flow" style={{ '--flow-delay': `${i * 0.3}s` } as React.CSSProperties} />
-                          <ChevronDown size={11} className="exp-step__chevron" />
+                          <ChevronUp size={11} className="exp-step__chevron" />
                         </div>
                       )}
                     </div>
