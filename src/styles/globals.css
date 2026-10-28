@@ -391,10 +391,11 @@ body::after {
   gap: 6px;
   padding: 7px 14px;
   border-radius: 50px;
-  background: var(--glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
+  background: rgba(15, 10, 30, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(192,132,252,0.1);
   pointer-events: none;
 }
 .view-counter__icon { color: var(--violet); flex-shrink: 0; }
@@ -407,7 +408,7 @@ body::after {
   background-clip: text;
   letter-spacing: 0.02em;
 }
-.view-counter__label { font-size: 11px; color: var(--text-3); font-weight: 500; }
+.view-counter__label { font-size: 11px; color: var(--text-2); font-weight: 500; }
 
 /* =============================================
    HERO — V2
