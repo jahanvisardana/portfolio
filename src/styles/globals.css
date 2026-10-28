@@ -658,9 +658,8 @@ body::after {
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 8px 4px 24px;
-  cursor: grab;
 }
-.carousel__track:active { cursor: grabbing; }
+
 .carousel__track::-webkit-scrollbar { display: none; }
 .carousel__slide { flex: 0 0 370px; scroll-snap-align: start; }
 .carousel__card {
