@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import { siteConfig } from '../../config/site';
+import ResumeModal from '../ResumeModal';
 
 function ProfileAvatar() {
   return (
@@ -41,10 +43,13 @@ function ProfileAvatar() {
             background: 'var(--bg)',
           }}
         />
-        {/* Photo */}
+        {/* Photo — protected from easy download */}
         <img
           src={`${import.meta.env.BASE_URL}profile.png`}
           alt="Jahanvi"
+          draggable={false}
+          onContextMenu={(e) => e.preventDefault()}
+          onDragStart={(e) => e.preventDefault()}
           style={{
             position: 'absolute',
             inset: 6,
@@ -53,6 +58,20 @@ function ProfileAvatar() {
             borderRadius: '50%',
             objectFit: 'cover',
             objectPosition: 'center top',
+            WebkitUserDrag: 'none',
+            userSelect: 'none',
+            pointerEvents: 'none',
+          } as React.CSSProperties}
+        />
+        {/* Transparent overlay to block right-click on image */}
+        <div
+          aria-hidden="true"
+          onContextMenu={(e) => e.preventDefault()}
+          style={{
+            position: 'absolute',
+            inset: 6,
+            borderRadius: '50%',
+            zIndex: 2,
           }}
         />
       </div>
@@ -95,77 +114,81 @@ const item = (reduce: boolean | null) => ({
 export default function HeroSection() {
   const shouldReduce = useReducedMotion();
   const iv = item(shouldReduce);
+  const [showResumeModal, setShowResumeModal] = useState(false);
 
   return (
-    <section className="hero section" aria-label="Introduction">
-      <div className="container">
-        <div className="hero__inner">
+    <>
+      <section className="hero section" aria-label="Introduction">
+        <div className="container">
+          <div className="hero__inner">
 
-          {/* Left: Content */}
-          <motion.div variants={container} initial="hidden" animate="show">
-            <motion.div variants={iv}>
-              <div className="hero__eyebrow">
-                <span className="hero__eyebrow-dot" />
-                Backend Software Engineer · GeekyAnts · India
-              </div>
-            </motion.div>
+            {/* Left: Content */}
+            <motion.div variants={container} initial="hidden" animate="show">
+              <motion.div variants={iv}>
+                <div className="hero__eyebrow">
+                  <span className="hero__eyebrow-dot" />
+                  Backend Software Engineer · GeekyAnts · India
+                </div>
+              </motion.div>
 
-            <motion.h1 className="hero__heading" variants={iv}>
-              Hi, I'm{' '}
-              <span className="hl">Jahanvi.</span>
-              <br />
-              <span className="hi" style={{ fontSize: '0.72em', letterSpacing: '-1.5px' }}>
-                I build systems that scale.
-              </span>
-            </motion.h1>
+              <motion.h1 className="hero__heading" variants={iv}>
+                Hi, I'm{' '}
+                <span className="hl">Jahanvi.</span>
+                <br />
+                <span className="hi" style={{ fontSize: '0.72em', letterSpacing: '-1.5px' }}>
+                  I build systems that scale.
+                </span>
+              </motion.h1>
 
-            <motion.p className="hero__sub" variants={iv}>
-              Backend engineer specializing in APIs, microservices & database architecture.
-              Currently <span className="co">Senior Software Engineer II at GeekyAnts</span>.
-            </motion.p>
+              <motion.p className="hero__sub" variants={iv}>
+                Backend engineer specializing in APIs, microservices & database architecture.
+                Currently <span className="co">Senior Software Engineer II at GeekyAnts</span>.
+              </motion.p>
 
-            <motion.div className="hero__actions" variants={iv}>
-              <Link to="/projects" className="btn btn-primary">
-                View My Work
-                <ArrowRight size={16} />
-              </Link>
-              <Link to="/contact" className="btn btn-secondary">
-                Let's Talk
-              </Link>
-              <a
-                href={`${import.meta.env.BASE_URL}Jahanvi_2026.pdf`}
-                download="Jahanvi_2026.pdf"
-                className="hero__resume-link"
-                aria-label="Download resume PDF"
+              <motion.div className="hero__actions" variants={iv}>
+                <Link to="/projects" className="btn btn-primary">
+                  View My Work
+                  <ArrowRight size={16} />
+                </Link>
+                <Link to="/contact" className="btn btn-secondary">
+                  Let's Talk
+                </Link>
+                <button
+                  className="hero__resume-link"
+                  aria-label="Get resume via email"
+                  onClick={() => setShowResumeModal(true)}
+                >
+                  <Download size={14} />
+                  Resume
+                </button>
+              </motion.div>
+
+              <motion.div
+                variants={iv}
+                style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}
+                aria-label="Core technologies"
               >
-                <Download size={14} />
-                Resume
-              </a>
+                {['NestJS', 'Node.js', 'PostgreSQL', 'TypeScript', 'GraphQL'].map((t) => (
+                  <span key={t} className="tag tag-v">{t}</span>
+                ))}
+              </motion.div>
             </motion.div>
 
+            {/* Right: Profile Avatar */}
             <motion.div
-              variants={iv}
-              style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}
-              aria-label="Core technologies"
+              className="hero__visual"
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.75, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              {['NestJS', 'Node.js', 'PostgreSQL', 'TypeScript', 'GraphQL'].map((t) => (
-                <span key={t} className="tag tag-v">{t}</span>
-              ))}
+              <ProfileAvatar />
             </motion.div>
-          </motion.div>
 
-          {/* Right: Profile Avatar */}
-          <motion.div
-            className="hero__visual"
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.75, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <ProfileAvatar />
-          </motion.div>
-
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {showResumeModal && <ResumeModal onClose={() => setShowResumeModal(false)} />}
+    </>
   );
 }
