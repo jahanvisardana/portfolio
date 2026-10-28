@@ -585,6 +585,12 @@ body::after {
   position: relative;
   z-index: 1;
 }
+[data-theme="light"] .marquee-section {
+  background: rgba(192,132,252,0.08);
+  border-top-color: rgba(192,132,252,0.2);
+  border-bottom-color: rgba(192,132,252,0.2);
+}
+[data-theme="light"] .marquee-item { color: var(--text-2); }
 .marquee-section::before,
 .marquee-section::after {
   content: '';
