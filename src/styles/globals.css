@@ -1328,6 +1328,12 @@ body::after {
 [data-theme="light"] .editor-code { color: var(--text-2); }
 [data-theme="light"] .tag { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); color: var(--text-2); }
 [data-theme="light"] .footer { background: rgba(237,233,254,0.8); }
+[data-theme="light"] .view-counter {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(192, 132, 252, 0.4);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.1), 0 0 0 1px rgba(192,132,252,0.15);
+}
+[data-theme="light"] .view-counter__label { color: var(--text-3); }
 
 /* =============================================
    REDUCED MOTION
